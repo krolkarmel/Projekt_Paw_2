@@ -1,0 +1,7 @@
+com\Library\entities\User.class
+com\Library\entities\Opinion.class
+com\Library\user\UserListBB.class
+com\Library\user\UserEditBB.class
+com\Library\entities\Book.class
+com\Library\dao\UserDAO.class
+com\Library\entities\Rental.class
