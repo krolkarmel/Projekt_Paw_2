@@ -1,0 +1,52 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/templates/page-template.xhtml">
+        <ui:define name="pageContent">
+            <h:form id="formId">
+                <p:menubar>
+        <p:menuitem value="Home" outcome="index?faces-redirect=true" styleClass="ui-button-secondary"/>
+    </p:menubar>
+                <p:dataTable id="dataTableId" var="user" value="#{userListBB.fullList}">
+                    <p:column headerText="ID">
+                        <h:outputText value="#{user.id}" />
+                    </p:column>
+                    <p:column headerText="Email">
+                        <h:outputText value="#{user.email}" />
+                    </p:column>
+                    <p:column headerText="Imię">
+                        <h:outputText value="#{user.name}" />
+                    </p:column>
+                    <p:column headerText="Nazwisko">
+                        <h:outputText value="#{user.surname}" />
+                    </p:column>
+                        
+                        <p:column headerText="Rola">
+                            <h:outputText value="Rola:" />
+                            </p:column>
+                        
+                        <p:column headerText="Nowa rola">
+                    <p:selectOneMenu id="role" value="#{user.role}" 
+                                     required="true" requiredMessage="Rola jest wymagana" style="width: 100%;">
+                        <f:selectItem itemLabel="Wybierz rolę" itemValue="" noSelectionOption="true" />
+                        <f:selectItem itemLabel="Admin" itemValue="admin" />
+                        <f:selectItem itemLabel="Bibliotekarz" itemValue="worker" />
+                        <f:selectItem itemLabel="Klient" itemValue="user" />
+                    </p:selectOneMenu>
+                            
+                        </p:column>
+                        
+                    <p:column headerText="Akcja">
+                         <p:commandButton value="Zapisz zmiany" action="#{userRoleEditBB.saveRole()}" 
+                                     update="dataTableId" 
+                                     styleClass="ui-button-success" icon="pi pi-save" />
+
+                    <p:button value="Anuluj" outcome="userList" styleClass="ui-button-secondary" />
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

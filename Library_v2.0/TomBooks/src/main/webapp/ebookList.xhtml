@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/templates/page-template.xhtml">
+        <ui:define name="pageContent">
+            <h:form id="formId">
+                <p:menubar>
+                <p:menuitem value="Home" outcome="index?faces-redirect=true" styleClass="ui-button-secondary"/>
+                <p:menuitem value="Dodaj ebooka" action="ebookCreate?faces-redirect=true" styleClass="ui-button-secondary" />
+                </p:menubar>
+
+                <p:dataTable id="dataTableId" var="ebook" value="#{ebookListBB.fullList}">
+                    <p:column headerText="ID">
+                        <h:outputText value="#{ebook.id}" />
+                    </p:column>
+                    <p:column headerText="Tytuł">
+                        <h:outputText value="#{ebook.title}" />
+                    </p:column>
+                    <p:column headerText="Autor">
+                        <h:outputText value="#{ebook.author}" />
+                    </p:column>
+                    <p:column headerText="Gatunek">
+                        <h:outputText value="#{ebook.genre}" />
+                    </p:column>
+                    <p:column headerText="Akcja">
+                        <p:commandButton value="Usuń"
+                                         action="#{ebookListBB.deleteEbook(ebook.id)}"
+                                         update=":formId:dataTableId"
+                                         icon="pi pi-trash"
+                                         styleClass="ui-button-danger" />
+                        <p:commandButton value="Edytuj" style="margin-right: 0.5em"
+                                         icon="pi pi-pencil" 
+                                         action="#{ebookListBB.editEbook(ebook)}" />
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
