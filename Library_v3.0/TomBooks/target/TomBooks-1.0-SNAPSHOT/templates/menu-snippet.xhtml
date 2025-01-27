@@ -1,0 +1,17 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:form>
+    <p:menubar>
+
+        <p:menuitem value="Home" outcome="index?faces-redirect=true" styleClass="ui-button-secondary"/>
+<!--        <p:menuitem value="User List" outcome="userList?faces-redirect=true" styleClass="ui-button-secondary"/>
+        <p:menuitem value="E-book List" outcome="ebookList?faces-redirect=true" styleClass="ui-button-secondary"/>
+        <p:menuitem value="Book List" outcome="bookList?faces-redirect=true" styleClass="ui-button-secondary"/>-->
+        <p:menuitem value="Zaloguj" outcome="loginView?faces-redirect=true" styleClass="ui-button-secondary"/>
+        <p:menuitem value="Załóż konto" outcome="registerView?faces-redirect=true" styleClass="ui-button-secondary"/>
+
+    </p:menubar>
+</h:form>
+</ui:composition>

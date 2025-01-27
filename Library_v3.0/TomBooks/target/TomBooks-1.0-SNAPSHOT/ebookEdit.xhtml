@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:composition template="/templates/page-template.xhtml">
+        <ui:define name="pageContent">
+            <f:metadata>
+                <f:viewAction action="#{eBookEditBB.onLoad()}" />
+            </f:metadata>
+
+            <h:body style="background-color: #eee; margin: 0.5em;">
+
+                <p:panel toggleable="true" header="Edycja e-booka">
+
+                    <h:form rendered="#{eBookEditBB.ebook != null}">
+                        <h:panelGrid columns="3" cellpadding="5">
+
+                            <h:outputLabel for="ebook-kod" value="Kod:" />
+                            <p:inputText id="ebook-kod" value="#{eBookEditBB.ebook.kod}"
+                                         required="true" requiredMessage="Podaj kod"
+                                         validatorMessage="co najwyżej 50 znaków">
+                                <f:validateLength maximum="50" />
+                            </p:inputText>
+                            <p:message for="ebook-kod" display="icon" />
+
+                            <h:outputLabel for="ebook-tytul" value="Tytuł:" />
+                            <p:inputText id="ebook-tytul" value="#{eBookEditBB.ebook.tytul}"
+                                         required="true" requiredMessage="Podaj tytuł"
+                                         validatorMessage="co najwyżej 100 znaków">
+                                <f:validateLength maximum="100" />
+                            </p:inputText>
+                            <p:message for="ebook-tytul" display="icon" />
+
+                            <h:outputLabel for="ebook-imieAutora" value="Imię autora:" />
+                            <p:inputText id="ebook-imieAutora" value="#{eBookEditBB.ebook.imieAutora}"
+                                         required="true" requiredMessage="Podaj imię autora"
+                                         validatorMessage="co najwyżej 50 znaków">
+                                <f:validateLength maximum="50" />
+                            </p:inputText>
+                            <p:message for="ebook-imieAutora" display="icon" />
+
+                            <h:outputLabel for="ebook-nazwiskoAutora" value="Nazwisko autora:" />
+                            <p:inputText id="ebook-nazwiskoAutora" value="#{eBookEditBB.ebook.nazwiskoAutora}"
+                                         required="true" requiredMessage="Podaj nazwisko autora"
+                                         validatorMessage="co najwyżej 50 znaków">
+                                <f:validateLength maximum="50" />
+                            </p:inputText>
+                            <p:message for="ebook-nazwiskoAutora" display="icon" />
+
+                            <h:outputLabel for="ebook-dataWydania" value="Data wydania:" />
+                            <p:calendar id="ebook-dataWydania" value="#{eBookEditBB.ebook.dataWydania}"
+                                         required="true" requiredMessage="Podaj datę wydania" />
+                            <p:message for="ebook-dataWydania" display="icon" />
+
+                            <h:outputLabel for="ebook-cena" value="Cena:" />
+                            <p:inputText id="ebook-cena" value="#{eBookEditBB.ebook.cena}"
+                                         required="true" requiredMessage="Podaj cenę"
+                                         validatorMessage="Podaj poprawną liczbę">
+                                <f:validateDoubleRange minimum="0" />
+                            </p:inputText>
+                            <p:message for="ebook-cena" display="icon" />
+
+                            <h:outputLabel for="ebook-formatPliku" value="Format pliku:" />
+                            <p:inputText id="ebook-formatPliku" value="#{eBookEditBB.ebook.formatPliku}"
+                                         required="true" requiredMessage="Podaj format pliku"
+                                         validatorMessage="co najwyżej 10 znaków">
+                                <f:validateLength maximum="10" />
+                            </p:inputText>
+                            <p:message for="ebook-formatPliku" display="icon" />
+
+                            <h:outputLabel for="ebook-status" value="Status:" />
+                            <p:selectOneMenu id="ebook-status" value="#{eBookEditBB.ebook.status}"
+                                             required="true" requiredMessage="Wybierz status">
+                                <f:selectItem itemLabel="Aktywny" itemValue="ACTIVE" />
+                                <f:selectItem itemLabel="Nieaktywny" itemValue="INACTIVE" />
+                            </p:selectOneMenu>
+                            <p:message for="ebook-status" display="icon" />
+
+                            <h:outputLabel for="ebook-linkPobrania" value="Link pobrania:" />
+                            <p:inputText id="ebook-linkPobrania" value="#{eBookEditBB.ebook.linkPobrania}"
+                                         required="true" requiredMessage="Podaj link pobrania"
+                                         validatorMessage="co najwyżej 255 znaków">
+                                <f:validateLength maximum="255" />
+                            </p:inputText>
+                            <p:message for="ebook-linkPobrania" display="icon" />
+                        </h:panelGrid>
+
+                        <p:messages id="msgs" />
+
+                        <p:commandButton value="Zapisz" action="#{eBookEditBB.saveData()}"
+                                         style="margin-right: 1em;" update="@form" />
+
+                        <p:button value="Anuluj" outcome="ebookList" />
+                    </h:form>
+
+                </p:panel>
+
+            </h:body>
+        </ui:define>
+    </ui:composition>
+</html>

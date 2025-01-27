@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/templates/page-template.xhtml">
+        <ui:define name="pageContent">
+            <h:form id="formId">
+                <p:menubar>
+                <p:menuitem value="Home" outcome="workerView?faces-redirect=true" styleClass="ui-button-secondary"/>
+                <p:menuitem value="Dodaj e-book" action="ebookCreate?faces-redirect=true" styleClass="ui-button-secondary" />
+                </p:menubar>
+
+                <p:dataTable id="dataTableId2" var="ebook" value="#{eBookListBB.fullList}" lazy="false">
+                    <p:column headerText="ID">
+                        <h:outputText value="#{ebook.id}" />
+                    </p:column>
+                    <p:column headerText="kod">
+                        <h:outputText value="#{ebook.kod}"/>
+                    </p:column>
+                    <p:column headerText="Tytuł">
+                        <h:outputText value="#{ebook.tytul}" />
+                    </p:column>
+                    <p:column headerText="Imie autora">
+                        <h:outputText value="#{ebook.imieAutora}" />
+                    </p:column>
+                    <p:column headerText="Nazwisko autora">
+                        <h:outputText value="#{ebook.nazwiskoAutora}" />
+                    </p:column >
+                    <p:column headerText="Data wydania">
+                        <h:outputText value="#{ebook.dataWydania}"/>
+                    </p:column>
+                    <p:column headerText="Cena">
+                        <h:outputText value="#{ebook.cena}"/>
+                    </p:column>
+                    <p:column headerText="Format pliku">
+                        <h:outputText value="#{ebook.formatPliku}"/>
+                    </p:column>
+                    <p:column headerText="Status">
+                        <h:outputText value="#{ebook.status}"/>
+                    </p:column>
+                    <p:column headerText="Link pobrania">
+                        <h:outputText value="#{ebook.linkPobrania}"/>
+                    </p:column>
+                    <p:column headerText="Akcja">
+                        <p:commandButton value="Usuń"
+                                         action="#{eBookListBB.deleteEbook(ebook.id)}"
+                                         update=":formId:dataTableId2"
+                                         icon="pi pi-trash"
+                                         styleClass="ui-button-danger" />
+                        <p:commandButton value="Edytuj" style="margin-right: 0.5em"
+                                         icon="pi pi-pencil" 
+                                         action="#{eBookListBB.editEbook(ebook)}" />
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
