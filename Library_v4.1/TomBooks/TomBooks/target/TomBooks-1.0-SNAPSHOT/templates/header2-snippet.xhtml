@@ -1,0 +1,27 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <!-- Nagłówek z logo -->
+    <h:panelGroup styleClass="header" layout="block" 
+                  style="text-align: center; padding: 1em; background-color: #3c8dbc; color: white;">
+        <h1>TomBooks</h1>
+        <img src="#{resource['images/owl.png']}" alt="TomBooks Logo" 
+             style="margin-top: 10px; width: 150px; height: auto;" />
+    </h:panelGroup>
+    
+    <!-- Panel z powitaniem i stanem konta -->
+    <h:panelGroup styleClass="panel" layout="block" 
+                  style="padding: 1em; background-color: #5fa4cc; color: black; display: flex; justify-content: space-between; align-items: center;">
+        
+        <!-- Powitanie wyśrodkowane -->
+        <div style="flex: 1; text-align: left;">
+            <label>Cześć #{remoteClient.details.name}!</label>
+        </div>
+        
+        <!-- Ikona i Stan konta wyrównane do prawej -->
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <img src="#{resource['images/portfel1.png']}" alt="Portfel" style="width: 20px; height: 20px;" />
+            <label>Stan konta: #{remoteClient.details.saldo}</label>
+        </div>
+    </h:panelGroup>
+</ui:composition>

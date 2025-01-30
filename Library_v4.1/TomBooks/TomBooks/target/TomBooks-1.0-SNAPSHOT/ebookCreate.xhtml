@@ -1,0 +1,76 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="jakarta.faces.core">
+    <ui:composition template="/templates/page-template.xhtml">
+        <ui:define name="pageContent">
+            <h2 style="text-align: center; margin-bottom: 20px;">Dodaj Nowego E-Booka</h2>
+            
+            <h:form id="createEbookForm">
+                <p:panel header="Szczegóły E-Booka" style="width: 400px; margin: auto;">
+                    <p:outputLabel for="tytul" value="Tytuł:" />
+                    <p:inputText id="tytul" value="#{eBookCreateBB.newEbook.tytul}" 
+                                 required="true" requiredMessage="Tytuł jest wymagany" 
+                                 style="width: 100%;" />
+
+                    
+                    <p:outputLabel for="imieAutora" value="Imię autora:" />
+                    <p:inputText id="imieAutora" value="#{eBookCreateBB.newEbook.imieAutora}" 
+                                 required="true" requiredMessage="Autor jest wymagany" 
+                                 style="width: 100%;" />
+
+                    <p:outputLabel for="nazwiskoAutora" value="Nazwisko autora:" />
+                    <p:inputText id="nazwiskoAutora" value="#{eBookCreateBB.newEbook.nazwiskoAutora}" 
+                                 required="true" requiredMessage="Autor jest wymagany" 
+                                 style="width: 100%;" />
+                    
+                    <p:outputLabel for="kod" value="Kod:" />
+                    <p:inputText id="kod" value="#{eBookCreateBB.newEbook.kod}" 
+                                 required="true" requiredMessage="Kod jest wymagany" 
+                                 style="width: 100%;" />
+                    
+                    <br></br>
+                    <p:outputLabel for="createDate" value="Data Wydania:" />
+                    <p:calendar id="createDate" value="#{eBookCreateBB.newEbook.dataWydania}" 
+                            required="true" requiredMessage="Data wydania jest wymagana" 
+                            style="width: 100%;" />
+                    
+                    <p:outputLabel for="formatPliku" value="Format:" />
+                    <p:selectOneMenu id="formatPliku" value="#{eBookCreateBB.newEbook.formatPliku}" 
+                                     required="true" requiredMessage="Format jest wymagany" style="width: 100%;">
+                        <f:selectItem itemLabel="Wybierz format" itemValue="" noSelectionOption="true" />
+                        <f:selectItem itemLabel="PDF" itemValue="PDF" />
+                    </p:selectOneMenu>
+                    
+                    <p:outputLabel for="cena" value="Cena: (w zł)" />
+                                <br></br>
+
+                <p:inputNumber id="cena" value="#{eBookCreateBB.newEbook.cena}" 
+                               required="true" requiredMessage="Cena jest wymagana" 
+                               style="width: 100%;" 
+                               minValue="0" maxValue="1000000" />
+                    
+                    <p:outputLabel for="status" value="Status:" />
+                    <p:selectOneMenu id="status" value="#{eBookCreateBB.newEbook.status}" 
+                                     required="true" requiredMessage="Status jest wymagany" style="width: 100%;">
+                        <f:selectItem itemLabel="Wybierz status e-book" itemValue="" noSelectionOption="true" />
+                        <f:selectItem itemLabel="Dostępny" itemValue="Dostępny" />
+                        <f:selectItem itemLabel="Niedostępny" itemValue="Niedostępny" />
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="linkPobrania" value="Link do Pobrania:" />
+                    <p:inputText id="linkPobrania" value="#{eBookCreateBB.newEbook.linkPobrania}" 
+                                 required="true" requiredMessage="Link jest wymagany" 
+                                 style="width: 100%;" />
+
+                    <br></br>
+
+                    <p:commandButton value="Dodaj E-Book" action="#{eBookCreateBB.createEbook}" 
+                                     update="createEbookForm" icon="pi pi-save" 
+                                     styleClass="ui-button-success" />
+                </p:panel>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

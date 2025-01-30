@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/templates/page-template.xhtml">
+        <ui:define name="pageContent">
+            <h:form id="formId">
+                <p:menubar>
+                <p:menuitem value="Home" outcome="userView?faces-redirect=true" styleClass="ui-button-secondary"/>
+                <p:menuitem value="Dodaj e-book" action="ebookCreate?faces-redirect=true" styleClass="ui-button-secondary" />
+                </p:menubar>
+
+                <p:dataTable id="dataTableId2" var="ebook" value="#{eBookListBB.lazyModel}"
+                             paginator="true" rows="10" lazy="true"
+                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                             rowsPerPageTemplate="5,10,15">
+                    <p:column headerText="id">
+                        <h:outputText value="#{ebook.id}" />
+                    </p:column>
+                    <p:column headerText="Tytuł">
+                        <h:outputText value="#{ebook.tytul}" />
+                    </p:column>
+                    <p:column headerText="Data wydania">
+                        <h:outputText value="#{ebook.dataWydania}"/>
+                    </p:column>
+                    <p:column headerText="Cena">
+                        <h:outputText value="#{ebook.cena}"/>
+                    </p:column>
+                    <p:column headerText="Format pliku">
+                        <h:outputText value="#{ebook.formatPliku}"/>
+                    </p:column>
+                    <p:column headerText="Status">
+                        <h:outputText value="#{ebook.status}"/>
+                    </p:column>
+                    <p:column headerText="Akcja">
+                    <p:column headerText="Kup">
+    <h:outputText value="Nie można kupić" rendered="#{ebook.status == 'Niedostępny'}" style="color: red; font-weight: bold;" />
+    
+    <p:commandButton value="Kup" icon="pi pi-shopping-cart"
+                     action="#{eBookListBB.buyEbook(ebook)}"
+                     update="@form"
+                     styleClass="ui-button-success"
+                     rendered="#{ebook.status == 'Dostępny'}" />
+</p:column>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
