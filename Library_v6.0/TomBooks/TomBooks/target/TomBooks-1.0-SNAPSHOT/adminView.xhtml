@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:composition template="/templates/admin-template.xhtml">
+        <ui:define name="title">Witaj w TomBooks</ui:define>
+        <ui:define name="pageContent">
+            
+            <h1>Cześć #{remoteClient.details.name}!</h1>
+            <h1>ROLA: #{remoteClient.details.role}!</h1>
+            <h1>Panel Administratora</h1>
+            
+            
+            
+        </ui:define>
+    </ui:composition>
+</html>

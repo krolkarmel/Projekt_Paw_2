@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/templates/page-template.xhtml">
+        <ui:define name="pageContent">
+            <h1>Moje wypożyczone książki</h1>
+            
+            <h:form id="rentedBooksForm">
+                <p:dataTable var="rental" value="#{rentalListBB.getRentalsByUser(remoteClient.details.id)}" 
+                             paginator="true" rows="10" id="rentedBooksTable">
+                    
+                    <p:column headerText="Tytuł">
+                        <h:outputText value="#{rental.bookId.tytul}" />
+                    </p:column>
+                    
+                    <p:column headerText="Autor">
+                        <h:outputText value="#{rental.bookId.imieAutora} #{rental.bookId.nazwiskoAutora}" />
+                    </p:column>
+                    
+                    <p:column headerText="Data wypożyczenia">
+                        <h:outputText value="#{rental.createdAt}">
+                            <f:convertDateTime pattern="dd-MM-yyyy HH:mm"/>
+                        </h:outputText>
+                    </p:column>
+                    
+                    <p:column headerText="Data zwrotu">
+                        <h:outputText value="#{rental.createdAtPlusOneMonth}">
+                            <f:convertDateTime pattern="dd-MM-yyyy HH:mm"/>
+                        </h:outputText>
+                    </p:column>
+
+                    <p:column headerText="Status">
+                        <h:outputText value="Zwrócone" rendered="#{rental.createdAtPlusOneMonth != null}" style="color: green; font-weight: bold;" />
+                        <h:outputText value="Aktywne" rendered="#{rental.createdAtPlusOneMonth == null}" style="color: red; font-weight: bold;" />
+                    </p:column>
+
+                </p:dataTable>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
