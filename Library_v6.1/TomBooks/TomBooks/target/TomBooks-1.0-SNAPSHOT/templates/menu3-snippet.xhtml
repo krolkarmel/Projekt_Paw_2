@@ -1,0 +1,19 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+    
+                    <p:messages id="messages" closable="true" />
+
+                    <h:form>
+    <p:menubar>
+        <p:menuitem value="Home" outcome="workerView?faces-redirect=true" styleClass="ui-button-secondary"/>
+        <p:menuitem value="Zarządzaj książkami" outcome="bookList?faces-redirect=true" styleClass="ui-button-secondary"/>
+        <p:menuitem value="Zarządzaj e-bookami" outcome="ebookList?faces-redirect=true" styleClass="ui-button-secondary"/>
+        <!--<p:menuitem value="Edytuj e-book" outcome="bookList?faces-redirect=true" styleClass="ui-button-secondary"/>-->
+        <!--<p:menuitem value="Edytuj e-book" outcome="bookList?faces-redirect=true" styleClass="ui-button-secondary"/>-->        
+        <!--<p:menuitem value="Zarządzaj profilem" outcome="changePassword?faces-redirect=true" styleClass="ui-button-secondary"/>-->
+        <p:menuitem value="Wyloguj" action="#{loginBB.doLogout()}" update="messages"/>
+    </p:menubar>
+                        </h:form>
+</ui:composition>

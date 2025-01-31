@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/templates/page-template.xhtml">
+        <ui:define name="pageContent">
+            <h:form id="rentForm">
+                <p:menubar>
+                    <p:menuitem value="Home" outcome="userView?faces-redirect=true" styleClass="ui-button-secondary"/>
+                </p:menubar>
+
+                <p:dataTable id="rentTable" var="book" value="#{bookListBB.lazyModel}"
+                             paginator="true" rows="10" lazy="true"
+                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                             rowsPerPageTemplate="5,10,15">
+                    
+                    <p:column headerText="ID">
+                        <h:outputText value="#{book.id}" />
+                    </p:column>
+                    <p:column headerText="ISBN">
+                        <h:outputText value="#{book.isbn}"/>
+                    </p:column>
+                    <p:column headerText="Tytuł">
+                        <h:outputText value="#{book.tytul}" />
+                    </p:column>
+                    <p:column headerText="Autor">
+                        <h:outputText value="#{book.imieAutora} #{book.nazwiskoAutora}" />
+                    </p:column>
+                    <p:column headerText="Data wydania">
+                        <h:outputText value="#{book.dataWydania}"/>
+                    </p:column>                 
+
+                    <p:column headerText="Status">
+                        <h:outputText value="#{book.status}"/>
+                    </p:column>
+                    
+                    <p:column headerText="Akcja">
+                        <h:outputText value="#{book.status}" 
+                                      rendered="#{book.status == 'Niedostępna'}" 
+                                      style="color: red; font-weight: bold;" />
+                        
+                        <h:outputText value="#{book.status}" 
+                                      rendered="#{book.status == 'Wypożyczona'}" 
+                                      style="color: yellow; font-weight: bold;" />
+                        <p:commandButton value="Wypożycz" icon="pi pi-book"
+                                         action="#{bookListBB.rentBook(book, remoteClient.details.id)}"
+                                         update="@form"
+                                         styleClass="ui-button-primary"
+                                         rendered="#{book.status == 'Dostępna'}" />
+                    </p:column>
+
+                </p:dataTable>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

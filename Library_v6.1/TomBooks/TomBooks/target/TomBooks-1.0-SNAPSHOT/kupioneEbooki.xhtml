@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/templates/page-template.xhtml">
+        <ui:define name="pageContent">
+            <p:menubar>
+                    <p:menuitem value="Home" outcome="userView?faces-redirect=true" styleClass="ui-button-secondary"/>
+                </p:menubar>
+            <h1>Moje kupione e-booki</h1>
+            
+            <h:form id="boughtEbooksForm">
+                <p:dataTable var="transakcja" value="#{transakcjaListBB.getTransactionsByUser(remoteClient.details.id)}" 
+                             paginator="true" rows="10" id="boughtEbooksTable">
+                    
+                    <p:column headerText="Tytuł">
+                        <h:outputText value="#{transakcja.idEbooka.tytul}" />
+                    </p:column>
+                    
+                    <p:column headerText="Autor">
+                        <h:outputText value="#{transakcja.idEbooka.imieAutora} #{transakcja.idEbooka.nazwiskoAutora}" />
+                    </p:column>
+                    
+                    <p:column headerText="Data zakupu">
+                        <h:outputText value="#{transakcja.dataTransakcji}">
+                            <f:convertDateTime pattern="dd-MM-yyyy HH:mm"/>
+                        </h:outputText>
+                    </p:column>
+                    
+                    <p:column headerText="Pobierz">
+                        <h:commandButton value="Pobierz" action="#{transakcja.idEbooka.linkPobrania}" />
+                    </p:column>
+                    
+                </p:dataTable>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

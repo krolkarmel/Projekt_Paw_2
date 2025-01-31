@@ -1,0 +1,53 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/templates/page-template.xhtml">
+        <ui:define name="pageContent">
+            <h:form id="formId">
+                <p:menubar>
+        <p:menuitem value="Home" outcome="adminView?faces-redirect=true" styleClass="ui-button-secondary"/>
+        <p:menuitem value="Dodaj użytkownika" action="userCreate?faces-redirect=true" styleClass="ui-button-secondary" />
+    </p:menubar>
+                <p:dataTable id="dataTableId" var="user" value="#{userListBB.lazyModel}"
+                             paginator="true" rows="10" lazy="true"
+                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                             rowsPerPageTemplate="5,10,15">
+                    <p:column headerText="ID">
+                        <h:outputText value="#{user.id}" />
+                    </p:column>
+                    <p:column headerText="Email">
+                        <h:outputText value="#{user.email}" />
+                    </p:column>
+                    <p:column headerText="Imię">
+                        <h:outputText value="#{user.name}" />
+                    </p:column>
+                    <p:column headerText="Nazwisko">
+                        <h:outputText value="#{user.surname}" />
+                    </p:column>
+                    <p:column headerText="Data urodzenia">
+                        <h:outputText value="#{user.date}" />
+                    </p:column>
+                    <p:column headerText="Saldo">
+                        <h:outputText value="#{user.saldo}" />
+                    </p:column>
+                    <p:column headerText="Rola">
+                            <h:outputText value="#{user.role}" />
+                            </p:column>
+                        
+                    <p:column headerText="Akcja">
+                        <p:commandButton value="Usuń"
+                                         action="#{userListBB.deleteUser(user.id)}"
+                                         update=":formId:dataTableId"
+                                         icon="pi pi-trash"
+                                         styleClass="ui-button-danger" />
+                         <p:commandButton value="Edytuj" style="margin-right: 0.5em"
+                                          icon="pi pi-pencil" 
+                                          action="#{userListBB.editUser(user)}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
